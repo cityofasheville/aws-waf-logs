@@ -1,0 +1,2 @@
+# Convert AWS WAF logs to CSV
+This script will ingest all WAF log files you've placed in `./log-files` and compile all of the file contents into a single CSV. Each URI will appear once in the CSV with a count of occurrences.
