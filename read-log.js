@@ -43,6 +43,9 @@ fs.readdir(logDirectoryPath, function (err, files) {
 
   console.log(allLogData.length);
 
+  function isRedirectli(header) {
+    return (header.name === 'x-request' && header.value === 'redirect.li');
+  }
 
   for (i in allLogData) {
 
@@ -55,6 +58,16 @@ fs.readdir(logDirectoryPath, function (err, files) {
         ("0" + logEntryDT.getUTCMinutes()).slice(-2);
   
       const existingURI = csvData.findIndex(element => element.uri === lineJSON.httpRequest.uri);
+
+      if (lineJSON.httpRequest.headers.find(isRedirectli) !== undefined) {
+        console.log(lineJSON);
+        console.log(lineJSON.httpRequest.headers);
+      }
+
+      // if (lineJSON.httpRequest.uri.includes('projects/')) {
+      //   console.log(lineJSON.httpRequest.headers);
+      //   console.log(lineJSON);
+      // }
       
       if (existingURI === -1) {
         let csvObject = {
